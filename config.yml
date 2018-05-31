@@ -1,0 +1,49 @@
+--- 
+- gather_facts: false
+  hosts: all
+  remote_user: root
+  tasks: 
+
+  - name: Cloning appscale
+    become: true
+    git:
+      repo: git://github.com/AppScale/appscale.git
+      dest: /root/appscale
+
+  - name: Cloning appscale-tools
+    become: true
+    git:
+      repo: git://github.com/AppScale/appscale-tools.git
+      dest: /root/appscale-tools
+
+  - name: Get bootstrap.sh
+    become: true
+    get_url:
+      url: https://bootstrap.appscale.com
+      dest: /root/bootstrap.sh
+
+  - name: Update fast-start env
+    become: true
+    replace:
+      path: /root/appscale/scripts/fast-start.sh
+      regexp: '^PROVIDER=\"\"'
+      replace: 'PROVIDER="Docker" && /usr/sbin/sshd && /usr/sbin/cron'
+
+  - name: Update appscale_build env
+    become: true
+    replace:
+      path: /root/appscale/debian/appscale_build.sh
+      regexp: '^export IN_DOCKER=\"no\"'
+      replace: 'export IN_DOCKER="yes"'
+
+  - name: Installing appscale from source
+    become: true
+    shell: bash bootstrap.sh
+    args:
+      chdir: /root
+
+  - name: Start appscale
+    become: true
+    shell: bash appscale/scripts/fast-start.sh --no-demo-app
+    args:
+      chdir: /root
