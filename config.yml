@@ -4,6 +4,12 @@
   remote_user: root
   tasks: 
 
+  - name: Installing git
+    become: true
+    apt:
+      name: git
+      update_cache: yes
+
   - name: Cloning appscale
     become: true
     git:
