@@ -10,6 +10,12 @@
       name: git
       update_cache: yes
 
+  - name: Installing psmisc
+    become: true
+    apt:
+      name: psmisc
+      update_cache: yes
+
   - name: Cloning appscale
     become: true
     git:
