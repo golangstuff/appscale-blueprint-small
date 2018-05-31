@@ -16,6 +16,12 @@
       name: psmisc
       update_cache: yes
 
+  - name: Installing locales
+    become: true
+    apt:
+      name: locales
+      update_cache: yes
+
   - name: Cloning appscale
     become: true
     git:
@@ -47,6 +53,10 @@
       path: /root/appscale/debian/appscale_build.sh
       regexp: '^export IN_DOCKER=\"no\"'
       replace: 'export IN_DOCKER="yes"'
+
+  - name: Generating locale
+    become: true
+    shell: locale-gen "en_US.UTF-8"
 
   - name: Installing appscale from source
     become: true
