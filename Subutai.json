@@ -1,0 +1,77 @@
+{
+    "name": "${environmentName}",
+    "description": "AppScale",
+    "version": "1.0.0",
+    "author": "https://github.com/liquuid",
+    "containers": [
+        {
+            "hostname": "${webContainerName}",
+            "template": "ubuntu-xenial",
+            "peer-criteria": "HTTP-GROUP",
+            "size": "${containerSize}",
+            "port-mapping": [
+                {
+                    "protocol": "http",
+                    "domain": "${domainName}",
+                    "internal-port": "1080",
+                    "external-port": "1080"
+                }
+            ]
+        }
+    ],
+    "peer-criteria": [
+        {
+            "name": "HTTP-GROUP",
+            "max-price": "25"
+        }
+    ],
+    "ansible-configuration": {
+        "source-url": "https://github.com/liquuid/appscale-subutai-blueprint/archive/master.zip",
+        "ansible-playbook": "config.yml",
+        "extra-vars": [
+            {
+                "key": "site_title",
+                "value": "${siteTitle}"
+            } 
+        ],
+        "groups": [
+            {
+                "name": "appscale",
+                "hostnames": [
+                    "${webContainerName}"
+                ]
+            }
+        ]
+    },
+    "user-variables": {
+        "environmentName": {
+            "description": "Enter the environment name",
+            "type": "string",
+            "default": "appscale",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "domainName": {
+            "description": "Select your domain or create new one",
+            "type": "domain",
+            "default": "change.the.domain",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "siteTitle": {
+            "description": "Enter the site's title",
+            "type": "string",
+            "default": "title"
+        },
+        "webContainerName": {
+            "description": "Enter the container's hostname",
+            "type": "string",
+            "default": "appscale",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "containerSize": {
+            "description": "Container Size",
+            "type": "enum",
+            "default": "LARGE",
+            "validation": "TINY,SMALL,MEDIUM,LARGE,HUGE"
+        }
+    }
+}
