@@ -22,6 +22,12 @@
       name: locales
       update_cache: yes
 
+  - name: Installing expect
+    become: true
+    apt:
+      name: expect
+      update_cache: yes
+
   - name: Cloning appscale
     become: true
     git:
@@ -40,13 +46,6 @@
       url: https://bootstrap.appscale.com
       dest: /root/bootstrap.sh
 
-  - name: Update fast-start env
-    become: true
-    replace:
-      path: /root/appscale/scripts/fast-start.sh
-      regexp: '^PROVIDER=\"\"'
-      replace: 'PROVIDER="Docker" && /usr/sbin/sshd && /usr/sbin/cron'
-
   - name: Update appscale_build env
     become: true
     replace:
@@ -58,14 +57,10 @@
     become: true
     shell: locale-gen "en_US.UTF-8"
 
-  - name: Installing appscale from source
-    become: true
-    shell: bash bootstrap.sh
-    args:
-      chdir: /root
+    #  - name: Installing appscale from source
+    #become: true
+    #shell: bash bootstrap.sh
+    #args:
+    #  chdir: /root
 
-  - name: Start appscale
-    become: true
-    shell: bash appscale/scripts/fast-start.sh --no-demo-app
-    args:
-      chdir: /root
+
