@@ -85,6 +85,7 @@
     with_items:
       - appscale-up.sh
       - create-appscalefile.sh
+      - create-simple-appscalefile.sh
       - fix-domain.sh
       - setup.sh
 
@@ -99,7 +100,7 @@
 
   - name: Creating AppScalefile
     become: true
-    shell: "/usr/local/bin/appscale init"
+    shell: "appscale/create-simple-appscalefile.sh"
     args:
       chdir: /root
 
