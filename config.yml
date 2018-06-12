@@ -2,6 +2,14 @@
 - gather_facts: false
   hosts: all
   remote_user: root
+  vars:
+    admin_email: a@a.com
+    admin_password: qweasd
+    domain: liquuid.me
+    master_ip: 10.0.2.15
+    compute_ip: 10.0.2.15
+    database_ip: 10.0.2.15
+    zookeeper_ip: 10.0.2.15
   tasks: 
 
   - name: Installing git
@@ -92,3 +100,28 @@
       mode: 0644
     with_items:
       - nginx-default
+
+  - name: Creating AppScalefile
+    become: true
+    shell: "appscale/create-appscalefile.sh -master {{ master_ip }} -appengine {{ compute_ip }} -database {{ database_ip }} -zookeeper {{ zookeeper_ip }}"
+    args:
+      chdir: /root
+
+  - name: Generating ssh key
+    become: true
+    shell: "ssh-keygen -t rsa -N \"\" -f .ssh/as.key"
+    args:
+      chdir: /root
+
+  - name: Authorizing key
+    become: true
+    shell: "cat .ssh/as.key.pub >> .ssh/authorized_keys"
+    args:
+      chdir: /root
+
+  - name: Setup AppScale
+    become: true
+    shell: "appscale/setup.sh {{ domain }} {{ admin_email }} {{ admin_password }}"
+    args:
+      chdir: /root
+
