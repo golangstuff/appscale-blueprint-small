@@ -50,10 +50,7 @@
 
   - name: Update appscale_build env
     become: true
-    replace:
-      path: /root/appscale/debian/appscale_build.sh
-      regexp: '^export IN_DOCKER=\"no\"'
-      replace: 'export IN_DOCKER="yes"'
+    shell: "sed 's/^export IN_DOCKER=\"no\"/export IN_DOCKER=\"yes\"/g' -i /root/appscale/debian/appscale_build.sh"
 
   - name: Generating locale
     become: true
@@ -91,7 +88,7 @@
     become: true
     template:
       src: "templates/{{ item }}"
-      dest: "/etc/nginx/sites-enabled/default"
+      dest: "/var/lib/appscale/{{ item }}"
       mode: 0644
     with_items:
       - nginx-default
