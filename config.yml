@@ -3,9 +3,9 @@
   hosts: all
   remote_user: root
   vars:
-    admin_email: {{ adminEmail }}
-    admin_password: {{ adminPassword }}
-    domain: {{ domainName }}
+    admin_email: "{{ adminEmail }}"
+    admin_password: "{{ adminPassword }}"
+    domain: "{{ domainName }}"
   tasks: 
 
   - name: Installing git
