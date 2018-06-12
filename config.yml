@@ -4,10 +4,6 @@
   remote_user: root
   tasks: 
   
-  - name: debug test
-    debug:
-      msg: "{{ domain_name }} {{ admin_email }} {{ admin_password }}"
-
   - name: Installing git
     become: true
     apt:
