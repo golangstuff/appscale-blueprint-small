@@ -5,7 +5,8 @@
   tasks: 
   
   - name: debug test
-    msg: "{{ domain }} {{ admin_email }} {{ admin_password }}"
+    debug:
+      msg: "{{ domain }} {{ admin_email }} {{ admin_password }}"
 
   - name: Installing git
     become: true
