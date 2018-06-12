@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "AppScale",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "author": "https://github.com/liquuid",
     "containers": [
         {
@@ -15,6 +15,12 @@
                     "domain": "${domainName}",
                     "internal-port": "1080",
                     "external-port": "1080"
+                }, 
+                {
+                    "protocol": "http",
+                    "domain": "${domainName}",
+                    "internal-port": "1443",
+                    "external-port": "1443"
                 }
             ]
         }
@@ -30,9 +36,17 @@
         "ansible-playbook": "config.yml",
         "extra-vars": [
             {
-                "key": "site_title",
-                "value": "${siteTitle}"
-            } 
+                "key": "admin_email",
+                "value": "${adminEmail}"
+            },
+            {
+                "key": "admin_password",
+                "value": "${adminPassword}"
+            },
+            {
+                "key": "domain_name",
+                "value": "${domainName}"
+            }
         ],
         "groups": [
             {
@@ -56,10 +70,15 @@
             "default": "change.the.domain",
             "validation": "[a-zA-Z0-9]+"
         },
-        "siteTitle": {
-            "description": "Enter the site's title",
+        "adminEmail": {
+            "description": "Enter the admin email",
             "type": "string",
-            "default": "title"
+            "default": "a@a.com"
+        },
+        "adminPassword": {
+            "description": "Enter the admin password",
+            "type": "password",
+            "default": "appscale"
         },
         "webContainerName": {
             "description": "Enter the container's hostname",
