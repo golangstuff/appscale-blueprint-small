@@ -33,12 +33,14 @@
     git:
       repo: git://github.com/AppScale/appscale.git
       dest: /root/appscale
+      force: yes
 
   - name: Cloning appscale-tools
     become: true
     git:
       repo: git://github.com/AppScale/appscale-tools.git
       dest: /root/appscale-tools
+      force: yes
 
   - name: Get bootstrap.sh
     become: true
@@ -57,10 +59,39 @@
     become: true
     shell: locale-gen "en_US.UTF-8"
 
-    #  - name: Installing appscale from source
-    #become: true
-    #shell: bash bootstrap.sh
-    #args:
-    #  chdir: /root
+  - name: Installing appscale from source
+    become: true
+    shell: bash bootstrap.sh
+    args:
+      chdir: /root
 
+  - name: Creating link to appscale
+    become: true
+    file:
+      src: "/root/{{ item.path }}"
+      dest: "/var/lib/{{ item.dest }}"
+      state: link
+    with_items:
+      - { path: "appscale", dest: "appscale" }
+      - { path: "appscale-tools", dest: "appscale-tools" }
 
+  - name: Copying scripts
+    become: true
+    template:
+      src: "scripts/{{ item }}"
+      dest: "/var/lib/appscale/{{ item }}"
+      mode: 0755
+    with_items:
+      - appscale-up.sh
+      - create-appscalefile.sh
+      - fix-domain.sh
+      - setup.sh
+
+  - name: nginx config
+    become: true
+    template:
+      src: "templates/{{ item }}"
+      dest: "/etc/nginx/sites-enabled/default"
+      mode: 0644
+    with_items:
+      - nginx-default
