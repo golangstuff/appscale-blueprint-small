@@ -3,13 +3,9 @@
   hosts: all
   remote_user: root
   vars:
-    admin_email: a@a.com
-    admin_password: qweasd
-    domain: liquuid.me
-    master_ip: 10.0.2.15
-    compute_ip: 10.0.2.15
-    database_ip: 10.0.2.15
-    zookeeper_ip: 10.0.2.15
+    admin_email: {{ adminEmail }}
+    admin_password: {{ adminPassword }}
+    domain: {{ domainName }}
   tasks: 
 
   - name: Installing git
