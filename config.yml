@@ -6,7 +6,7 @@
   
   - name: debug test
     debug:
-      msg: "{{ domainName }} {{ adminEmail }} {{ adminPassword }}"
+      msg: "{{ domain_name }} {{ admin_email }} {{ admin_password }}"
 
   - name: Installing git
     become: true
@@ -117,7 +117,7 @@
 
   - name: Setup AppScale
     become: true
-    shell: "appscale/setup.sh {{ domain }} {{ admin_email }} {{ admin_password }}"
+    shell: "appscale/setup.sh {{ domain_name }} {{ admin_email }} {{ admin_password }}"
     args:
       chdir: /root
 
