@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "AppScale",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "author": "https://github.com/liquuid",
     "containers": [
         {

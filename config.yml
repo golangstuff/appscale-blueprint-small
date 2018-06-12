@@ -2,11 +2,10 @@
 - gather_facts: false
   hosts: all
   remote_user: root
-  vars:
-    admin_email: "{{ adminEmail }}"
-    admin_password: "{{ adminPassword }}"
-    domain: "{{ domainName }}"
   tasks: 
+  
+  - name: debug test
+    msg: "{{ domain }} {{ admin_email }} {{ admin_password }}"
 
   - name: Installing git
     become: true
