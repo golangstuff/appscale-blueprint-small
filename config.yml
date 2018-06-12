@@ -6,7 +6,7 @@
   
   - name: debug test
     debug:
-      msg: "{{ domain }} {{ admin_email }} {{ admin_password }}"
+      msg: "{{ domainName }} {{ adminEmail }} {{ adminPassword }}"
 
   - name: Installing git
     become: true
