@@ -99,7 +99,7 @@
 
   - name: Creating AppScalefile
     become: true
-    shell: "appscale/create-appscalefile.sh -master {{ master_ip }} -appengine {{ compute_ip }} -database {{ database_ip }} -zookeeper {{ zookeeper_ip }}"
+    shell: "/usr/local/bin/appscale init"
     args:
       chdir: /root
 
