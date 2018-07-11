@@ -4,29 +4,16 @@
   remote_user: root
   tasks: 
   
-  - name: Installing git
-    become: true
+  - name: Installing tools
     apt:
-      name: git
-      update_cache: yes
-
-  - name: Installing psmisc
-    become: true
-    apt:
-      name: psmisc
-      update_cache: yes
-
-  - name: Installing locales
-    become: true
-    apt:
-      name: locales
-      update_cache: yes
-
-  - name: Installing expect
-    become: true
-    apt:
-      name: expect
-      update_cache: yes
+      name: "{{ item }}"
+      state: present
+      dpkg_options: force-confdef,force-confold,force-unsafe-io
+    with_items:
+      - git
+      - psmisc
+      - locales
+      - expect
 
   - name: Cloning appscale
     become: true
