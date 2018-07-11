@@ -4,6 +4,15 @@
   remote_user: root
   tasks: 
   
+  - name: Configuring dpkg
+    become: true
+    template:
+      src: "templates/{{ item }}"
+      dest: "/etc/dpkg/dpkg.cfg.d/{{ item }}"
+      mode: 0644
+    with_items:
+      - unsafe-io
+
   - name: Installing tools
     apt:
       name: "{{ item }}"
