@@ -44,6 +44,22 @@
     with_items:
       - pip
 
+  - name: Cloning appscale
+    become: true
+    git:
+      repo: git://github.com/AppScale/appscale.git
+      dest: /root/appscale
+      depth: 1
+      force: yes
+
+  - name: Cloning appscale-tools
+    become: true
+    git:
+      repo: git://github.com/AppScale/appscale-tools.git
+      dest: /root/appscale-tools
+      depth: 1
+      force: yes
+
   - name: Get bootstrap.sh
     become: true
     get_url:
