@@ -36,6 +36,7 @@
     git:
       repo: git://github.com/AppScale/appscale-tools.git
       dest: /root/appscale-tools
+      depth: 1
       force: yes
 
   - name: Get bootstrap.sh
