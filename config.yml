@@ -28,6 +28,15 @@
       - cython
       - libcapnp-dev
 
+  - name: Remove conflicting tools
+    apt:
+      name: "{{ item }}"
+      state: absent
+      dpkg_options: force-confdef,force-confold,force-unsafe-io
+    with_items:
+      - python-yaml
+      - python-psutil
+
   - name: Upgrade pip
     pip:
       name: "{{ item }}"
