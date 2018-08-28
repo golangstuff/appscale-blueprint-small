@@ -35,13 +35,14 @@
       dpkg_options: force-confdef,force-confold,force-unsafe-io
     with_items:
       - python-yaml
+      - python-psutil
 
-    - name: Upgrade pip
-      pip:
-        name: {{ item }}
-        state: latest
-      with_items:
-        - pip
+  - name: Upgrade pip
+    pip:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - pip
 
   - name: Cloning appscale
     become: true
