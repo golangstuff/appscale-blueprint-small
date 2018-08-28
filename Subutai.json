@@ -39,8 +39,7 @@
     ],
     "peer-criteria": [
         {
-            "name": "HTTP-GROUP",
-            "max-price": "25"
+            "name": "HTTP-GROUP"
         }
     ],
     "ansible-configuration": {
