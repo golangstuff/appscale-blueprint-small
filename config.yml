@@ -29,6 +29,7 @@
     git:
       repo: git://github.com/AppScale/appscale.git
       dest: /root/appscale
+      depth: 1
       force: yes
 
   - name: Cloning appscale-tools
