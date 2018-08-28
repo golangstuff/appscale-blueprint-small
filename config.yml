@@ -49,16 +49,16 @@
     git:
       repo: git://github.com/AppScale/appscale.git
       dest: /root/appscale
-      depth: 1
       force: yes
+      version: release-3.5
 
   - name: Cloning appscale-tools
     become: true
     git:
       repo: git://github.com/AppScale/appscale-tools.git
       dest: /root/appscale-tools
-      depth: 1
       force: yes
+      version: release-3.5
 
   - name: Get bootstrap.sh
     become: true
@@ -76,7 +76,7 @@
 
   - name: Installing appscale from source
     become: true
-    shell: bash bootstrap.sh
+    shell: bash bootstrap.sh --branch release-3.5 --tools-branch release-3.5
     args:
       chdir: /root
 
