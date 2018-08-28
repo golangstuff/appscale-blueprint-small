@@ -24,6 +24,8 @@
       - locales
       - expect
       - python-pip
+      - python-dev
+      - cython
 
     - name: Upgrade pip
       pip:
