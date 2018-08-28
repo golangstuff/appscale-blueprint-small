@@ -61,6 +61,14 @@
     become: true
     shell: "sed 's/^export IN_DOCKER=\"no\"/export IN_DOCKER=\"yes\"/g' -i /root/appscale/debian/appscale_build.sh"
 
+  - name: Update appscale dep versions
+    become: true
+    shell: "sed 's/tornado==4.2.0/tornado==4.2.1/g' -i /root/appscale/debian/appscale_install_functions.sh"
+
+  - name: Update AppTaskQueue dep versions
+    become: true
+    shell: "sed 's/tornado==4.2.0/tornado==4.2.1/g' -i /root/appscale/AppTaskQueue/setup.py"
+
   - name: Generating locale
     become: true
     shell: locale-gen "en_US.UTF-8"
