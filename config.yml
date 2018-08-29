@@ -78,6 +78,10 @@
     become: true
     shell: "sed 's/tornado==4.2.0/tornado==4.2.1/g' -i /root/appscale/AppTaskQueue/setup.py"
 
+  - name: Update appscale_build command
+    become: true
+    shell: "sed 's/tornado==4.2.0/tornado==4.2.1/g' -i /root/appscale/debian/appscale_install_functions.sh"
+
   - name: Generating locale
     become: true
     shell: locale-gen "en_US.UTF-8"
