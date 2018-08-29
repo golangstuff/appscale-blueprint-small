@@ -37,13 +37,6 @@
       - python-yaml
       - python-psutil
 
-  - name: Upgrade pip
-    pip:
-      name: "{{ item }}"
-      state: latest
-    with_items:
-      - pip
-
   - name: Cloning appscale
     become: true
     git:
