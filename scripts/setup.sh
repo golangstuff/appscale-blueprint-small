@@ -7,4 +7,4 @@ DIR=`dirname $0`
 
 $DIR/appscale-up.sh $2 $3
 
-$DIR/fix-domain.sh $1
+#$DIR/fix-domain.sh $1
