@@ -17,7 +17,7 @@
                     "external-port": "80"
                 }, 
                 {
-                    "protocol": "http",
+                    "protocol": "https",
                     "domain": "${domainName}",
                     "internal-port": "443",
                     "external-port": "443"
@@ -29,7 +29,7 @@
                     "external-port": "1080"
                 }, 
                 {
-                    "protocol": "http",
+                    "protocol": "https",
                     "domain": "${domainName}",
                     "internal-port": "1443",
                     "external-port": "1443"
