@@ -53,12 +53,6 @@
       force: yes
       version: release-3.5
 
-  - name: Get bootstrap.sh
-    become: true
-    get_url:
-      url: https://bootstrap.appscale.com
-      dest: /root/bootstrap.sh
-
   - name: Update appscale_build env
     become: true
     shell: "sed 's/^export IN_DOCKER=\"no\"/export IN_DOCKER=\"yes\"/g' -i /root/appscale/debian/appscale_build.sh"
@@ -69,7 +63,7 @@
 
   - name: Installing appscale from source
     become: true
-    shell: bash bootstrap.sh --branch release-3.5 --tools-branch release-3.5
+    shell: bash /root/appscale/bootstrap.sh --branch release-3.5 --tools-branch release-3.5
     args:
       chdir: /root
 
