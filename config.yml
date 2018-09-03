@@ -43,6 +43,7 @@
       repo: git://github.com/AppScale/appscale.git
       dest: /root/appscale
       force: yes
+      depth: 1
       version: release-3.5
 
   - name: Cloning appscale-tools
@@ -51,6 +52,7 @@
       repo: git://github.com/AppScale/appscale-tools.git
       dest: /root/appscale-tools
       force: yes
+      depth: 1
       version: release-3.5
 
   - name: Update appscale_build env
